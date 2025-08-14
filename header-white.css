@@ -422,6 +422,35 @@ header.global-header > .header-ridge-row .header-ridge-single{
   }
 }
 
+/* ==== Mobile menu: always fixed right under fixed header ==== */
+
+/* ヘッダーは z-index:1000 なので、パネルは 950 で“下に潜らず上にも出す” */
+.mobile-menu-panel{
+  position: fixed;
+  left: 0;
+  right: 0;
+  /* JS が --header-bottom にヘッダー下端のpx値を入れる */
+  top: calc(var(--header-bottom, 88px) + 8px);
+  z-index: 950;
+  padding: 12px 16px;
+  box-sizing: border-box;
+}
+
+/* クリック可能領域（中の白い箱） */
+.mobile-menu-panel .menu-box{
+  max-width: 360px;
+  margin: 0 auto 16px;
+  padding: 16px 20px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.08);
+}
+
+/* メニュー開いている間は背景スクロールを止める */
+html.is-menu-open{
+  overflow: hidden;
+}
+
 /* === index: CTA(#portfolio) → #ai-corner のギャップをさらに半分に === */
 /* ページ特定の隣接セレクタでピンポイントに上書き（他には影響しない） */
 #portfolio + #ai-corner{
@@ -429,7 +458,7 @@ header.global-header > .header-ridge-row .header-ridge-single{
 }
 
 /* モバイルで更に詰めたい場合はここで個別調整（任意） */
-@media (max-width: 768px){
+@media (max-width:768px){
   #portfolio + #ai-corner{ margin-top: 14px !important; }
 }
 

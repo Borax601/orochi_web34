@@ -1369,4 +1369,23 @@ function setupHeaderAutoHide(){
   document.addEventListener('keydown', (e)=>{
     if(e.key === 'Escape') closeMenu();
   });
+
+  function syncPanelTop(){
+    // ヘッダーの下端位置を取得してCSS変数に反映
+    const rect = header.getBoundingClientRect();
+    document.documentElement.style.setProperty('--header-bottom', `${Math.round(rect.bottom)}px`);
+  }
+
+  function onPanelClick(e){
+    const a = e.target.closest('a');
+    if(a){ closeMenu(); }
+  }
+
+  panel.addEventListener('click', onPanelClick);
+
+  window.addEventListener('resize', () => {
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      syncPanelTop();
+    }
+  });
 })();
